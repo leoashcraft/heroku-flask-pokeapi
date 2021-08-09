@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% block css %}
+<link rel="stylesheet" href="{{url_for('static',filename='css/index.css')}}">
+{% endblock %}
+{% block title %}
+Fakebook
+{% endblock %}
+{% block content %}
+
+<form method="POST" action="{{url_for('social.index')}}">
+    <div style="float: left; width: 50%;">
+      <h1>News Feed</h1>
+      {% for post in posts %}
+        {% include '/includes/_post.html'%}
+      {% endfor %}
+    </div>
+    <div style="float: right; width: 50%;">
+      <div style="float: left;">
+        <img src="{{current_user.get_icon_url()}}" style="height:33px;">
+      </div>
+      <div style="float: right;">
+      <textarea class="form-control" placeholder="What is on your mind?" name="body" style=" height: 100px;"></textarea><br />
+      <button type="submit" class="btn btn-primary"><i class="fas fa-paper-place"></i>Post</button>
+      </div>
+    </div>
+</form>
+<br />
+
+    <div class='indexcontent'>
+        <div class='indexcontainer'>
+          <div class='right_top'>
+
+            </div>  
+          <div class='left_bottom'>
+        {% if current_user.is_authenticated %}
+                <h3>Hello, {{current_user.first_name}}!</h3><br>
+        {% else %}
+        {% endif %}
+        <img src="{{url_for('static',filename='group.jpg')}}" class="catch"><br /><br />
+        {% if current_user.is_authenticated %}
+        <h5>Pokemon Search:</h5>
+                You can use the search field below to search for all 898 Pokemon.<br />
+
+        {% else %}
+        <h5 style="text-align: center;">You must log in before using the search feature.<br /><br />
+        <a href="{{url_for('auth.login')}}" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Login</a>
+</h5>
+
+        {% endif %}
+            </div>
+            
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,28 @@
+.pokemoncontent{
+}
+.pokemoncontainer{
+    width: 100%;
+}
+.left_bottom{
+
+    float: left;
+    width: 40%;
+}
+.right_top{
+    padding: 0 0 0 60px;
+    float: right;
+    width: 60%;
+}
+@media (max-width: 800px)
+    {
+        .left_bottom{
+            float: left;
+            width: 80%;
+        }
+        .right_top{
+            float: left;
+            width: 80%;
+        }
+        
+    }
+

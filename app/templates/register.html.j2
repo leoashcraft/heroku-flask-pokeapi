@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+  {% block css %}
+  <link rel="stylesheet" href="{{url_for('static',filename='css/register.css')}}">
+  {% endblock %}
+  {% block title %}
+  Register - Enter Details
+  {% endblock %}
+{% block content %}
+{% if current_user.is_authenticated %}
+<h2>Editing {{current_user.first_name}}'s Profile</h2><br>
+{% else %}
+<h1>Register</h1><br>
+{% endif %}
+    <div class='registercontent'>
+        <div class='registercontainer'>
+          <div class='right_top'>
+                  {% if current_user.is_authenticated %}
+    <div style="text-align: center; font-size: 18px; font-style: italic; margin-bottom: 20px;">Your Current Avatar:<br>
+    <img src="https://avatars.dicebear.com/api/gridy/{{current_user.icon}}.svg" style="height:150px; margin-left: 18px;"></div>
+  {% endif %}
+            </div>  
+          <div class='left_bottom'>
+<small style="color:red">{{error}}</small>
+
+<form action="{{url_for('auth.edit_profile') if current_user.is_authenticated else url_for('auth.register')}}" method="POST">
+  {{ form.hidden_tag() }}
+
+  {# icon section #}
+  <div>
+    {{form.icon.label}}
+  </div><br>
+  
+  <div class="reg-avatars">
+  {% for subfield in form.icon %}
+  {{subfield}}
+    {{subfield.label | safe}}
+  {% endfor %}
+    </div>
+  <br><br>
+    {% for error in form.icon.errors %}
+   {{ error }}
+  {% endfor %}
+  
+  {# first_name section #}
+  {{ form.first_name.label(class="form-label") }}
+  {{ form.first_name(class="form-control", value=current_user.first_name) }}
+<br>
+  {# last_name section #}
+  {{ form.last_name.label(class="form-label") }}
+  {{ form.last_name(class="form-control", value=current_user.last_name) }}
+<br>
+  {# email section #}
+  {{ form.email.label(class="form-label") }}
+  {{ form.email(class="form-control", value=current_user.email) }}
+
+  {# email errors #}
+  {% for error in form.email.errors %}
+   {{ error }}
+  {% endfor %}
+<br>
+  {# password section #}
+  {{ form.password.label(class="form-label") }}
+  {{ form.password(class="form-control") }}
+<br>
+  {# password section #}
+  {{ form.confirm_password.label(class="form-label") }}
+  {{ form.confirm_password(class="form-control") }}
+
+  {# password errors #}
+  {% for error in form.confirm_password.errors %}
+   {{ error }}
+  {% endfor %}
+<br>
+  {# submit section #}
+  {{ form.submit(class="btn btn-primary") }}
+</form>
+            </div>
+            
+        </div>
+    </div>
+
+
+
+
+{% endblock %}

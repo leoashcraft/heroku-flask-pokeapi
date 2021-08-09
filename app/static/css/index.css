@@ -1,0 +1,27 @@
+.indexcontent{
+}
+.indexcontainer{
+    width: 100%;
+}
+.left_bottom{
+    padding: 15px 0 15px 0;
+    float: left;
+    width: 50%;
+}
+.right_top{
+    padding: 15px 0 15px 0;
+    float: right;
+    width: 50%;
+}
+@media (max-width: 800px)
+    {
+        .left_bottom{
+            float: left;
+            width: 100%;
+        }
+        .right_top{
+            display: none;
+        }
+        
+    }
+
